@@ -1,0 +1,107 @@
+<div id="help" class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title" id="myModalLabel">Help</h3>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>Example Searches</h4>
+            <ul>
+              <li><a href="{{urlPrefix}}/?q=Leeroy Jenkins">Leeroy Jenkins</a></li>
+              <li><a href="{{urlPrefix}}/?q=playable:shaman race:beast">playable:shaman race:beast</a></li>
+              <li><a href="{{urlPrefix}}/?q=playable:paladin text:secret format:standard">playable:paladin text:secret format:standard</a></li>
+              <li><a href="{{urlPrefix}}/?q=attack>10 NOT r:legendary">attack>10 NOT r:legendary</a></li>
+              <li><a href="{{urlPrefix}}/?q=weapon:y durability=1 attack>=3">weapon:y durability=1 attack>=3</a></li>
+              <li><a href="{{urlPrefix}}/?q=(class:mage OR class:priest) AND (text:damage)">(class:mage OR class:priest) AND (text:damage)</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>Keywords</h4>
+          </div>
+          <div class="col-xs-4">
+            <dl>
+              <dt>class (cl, playerclass, pc)</dt>
+              <dd>class:paladin, cl:priest</dd>
+
+              <dt>playable (play, p)</dt>
+              <dd>playable:warlock, play:mage, p:shaman</dd>
+
+              <dt>format (f)</dt>
+              <dd>format:standard, f:wild</dd>
+
+              <dt>text (te)</dt>
+              <dd>text:taunt, te:battlecry</dd>
+
+              <dt>set (s)</dt>
+              <dd>set:og, set:gvg, s:naxx</dd>
+
+              <dt>type (ty)</dt>
+              <dd>type:minion, ty:spell</dd>
+
+              <dt>health (h)</dt>
+              <dd>health=3, health>4, h<=2</dd>
+            </dl>
+          </div>
+
+          <div class="col-xs-4">
+            <dl>
+
+              <dt>rarity (rare)</dt>
+              <dd>rarity:legendary, rarity:free rare:common</dd>
+
+              <dt>cost</dt>
+              <dd>cost=3, cost<5</dd>
+
+              <dt>attack (a)</dt>
+              <dd>attack=10, a<=3</dd>
+
+              <dt>race</dt>
+              <dd>race:mech, race:dragon</dd>
+
+              <dt>collectible (col)</dt>
+              <dd>collectible:n, col:y</dd>
+
+              <dt>artist (art)</dt>
+              <dd>artist:"Zoltan Boros", art:"Matt Dixon"</dd>
+
+              <dt>flavor</dt>
+              <dd>flavor:Boomshakalaka</dd>
+            </dl>
+          </div>
+
+          <div class="col-xs-4">
+            <dl>
+              <dt>faction (fac)</dt>
+              <dd>faction:horde, fac:alliance</dd>
+
+              <dt>durability (d)</dt>
+              <dd>durability>1, d=1</dd>
+
+              <dt>spelldamage (sd)</dt>
+              <dd>spelldamage>1, sd=1</dd>
+
+              <dt>overload (o)</dt>
+              <dd>overload>1, o=2</dd>
+
+              <dt>weapon (w)</dt>
+              <dd>weapon:y, w:n</dd>
+            </dl>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <p>Also supported: name, id, earn, arrow, eg</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

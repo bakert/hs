@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-xs-12">
+    <form name="f">
+      <div class="form-group">
+        <input type="text" class="form-control input-lg" type="text" name="q" tabindex="1" value="{{q}}">
+      </div>
+      <input class="btn btn-default" type="submit" value="Search">
+      {{#q}}
+        <p class="pull-right"><a href="#">Advanced Search</a> &bull; <a href="#" data-toggle="modal" data-target="#help">Syntax Help</a> &bull; <a href="#">About</a></p>
+      {{/q}}
+    </form>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 text-right">
+    <p>{{numResults}} cards</p>
+  </div>
+  <div class="col-xs-12 text-center">
+    {{#results}}
+      <img src="http://wow.zamimg.com/images/hearthstone/cards/enus/original/{{systemId}}.png">
+    {{/results}}
+  </div>
+</div>
+{{>help}}

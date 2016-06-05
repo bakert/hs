@@ -1,0 +1,10 @@
+{
+  "databasename": "hs",
+  "databasehost": "localhost",
+  "databaseusername": "hs",
+  "databasepassword": "jklasdffdhsjknvmx",
+  "databasetype": "mysql",
+  "hostname": "localhost",
+  "basepath": "/hs",
+  "logfile": "/var/log/apache2/hs/log"
+}
