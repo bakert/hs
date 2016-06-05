@@ -88,8 +88,6 @@ class Search {
       return $this->booleanWhere($attr->dbName(), (bool)$term->value());
     } elseif ($key->value() === 'set') {
       //BAKERT Unsupported for now
-    } elseif ($attr->name() === 'weapon') {
-      return "(durability IS " . (!$this->truthiness($term->value()) ? '' : 'NOT ') . 'NULL)';
     } elseif ($attr->name() === 'playable') {
       return ('(player_class IS NULL OR ' . $this->parseCriterion(new Key(str_split('class')), $operator, $term)) . ')';
     } elseif ($attr->name() === 'format') {

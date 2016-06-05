@@ -34,7 +34,6 @@ class Attribute {
       static::$attributes[] = new Attribute('durability', 'durability', 'durability', ['durability', 'd'], Key::NUMBER);
       static::$attributes[] = new Attribute('spellDamage', 'spellDamage', 'spell_damage', ['spelldamage', 'sd'], Key::NUMBER);
       static::$attributes[] = new Attribute('overload', 'overload', 'overload', ['overload', 'o'], Key::NUMBER);
-      static::$attributes[] = new Attribute('weapon', null, null, ['weapon', 'w'], Key::SPECIAL);
       static::$attributes[] = new Attribute('playable', null, null, ['playable', 'play', 'p'], Key::SPECIAL);
       static::$attributes[] = new Attribute('format', null, null, ['format', 'f'], Key::SPECIAL);
     }
