@@ -20,7 +20,7 @@ class Attribute {
       static::$attributes[] = new Attribute('name', 'name', 'name', ['name'], Key::TEXT);
       static::$attributes[] = new Attribute('id', 'id', 'system_id', ['id'], Key::TEXT);
       static::$attributes[] = new Attribute('health', 'health', 'health', ['health', 'h'], Key::NUMBER);
-      static::$attributes[] = new Attribute('rarity', 'rarity', 'rarity', ['rarity', 'rare'], Key::TEXT);
+      static::$attributes[] = new Attribute('rarity', 'rarity', 'rarity', ['rarity', 'r'], Key::TEXT);
       static::$attributes[] = new Attribute('cost', 'cost', 'cost', ['cost'], Key::NUMBER);
       static::$attributes[] = new Attribute('attack', 'attack', 'attack', ['attack', 'a'], Key::NUMBER);
       static::$attributes[] = new Attribute('race', 'race', 'race', ['race'], Key::TEXT);
