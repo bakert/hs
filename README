@@ -1,5 +1,21 @@
 Copyright (c) 2016 Thomas David Baker <bakert@gmail.com>
 
+ABOUT
+
+Advanced card search for hearthstone in the style of magiccards.info.
+
+Allows searches like this:
+
+  race:dragon AND r:legendary AND attack>10
+
+  playable:paladin AND cost<=3 AND text:secret
+
+  type:minion AND text:taunt
+
+If you just want to use the card search it's running at:
+
+  http://hs.bluebones.net/
+
 SETUP
 
 - Copy config.json.example to config.json and update with your values.
