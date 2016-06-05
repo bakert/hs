@@ -3,7 +3,7 @@ Copyright (c) 2016 Thomas David Baker <bakert@gmail.com>
 SETUP
 
 - Copy config.json.example to config.json and update with your values.
-- Run $ composer install.
-- Run $ php -f classes/setup.php
-- Run $ php -f classes/loader.php
+- $ composer install
+- $ php -f classes/setup.php
+- $ php -f classes/loader.php
 
