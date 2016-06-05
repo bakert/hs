@@ -1,7 +1,6 @@
 <?php
 
 class Key extends Token {
-  const BOOLEAN = 'boolean';
   const NUMBER = 'number';
   const SPECIAL = 'special';
   const TEXT = 'text';

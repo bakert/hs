@@ -84,10 +84,13 @@ class Search {
       return $this->where($attr->dbName(), $operator->value(), $term->value());
     } elseif ($attr->type() === Key::NUMBER) {
       return $this->mathWhere($attr->dbName(), $operator->value(), $term->value());
-    } elseif ($attr->type() === Key::BOOLEAN) {
-      return $this->booleanWhere($attr->dbName(), (bool)$term->value());
+    } elseif ($attr->name() === 'collectible') {
+      if (in_array($term->value(), ['both', 'either', '2'])) {
+        return '(collectible IS NULL OR collectible IS NOT NULL)'; // Always true but avoids the later check for presence of 'collectible' in query.
+      }
+      return '(collectible IS ' . ($this->truthiness($term->value()) ? 'NOT ' : '') . 'NULL)';
     } elseif ($key->value() === 'set') {
-      //BAKERT Unsupported for now
+      return '(set_id IN (SELECT set_id FROM set_name WHERE ' . $this->parseCriterion(new Key(str_split('name')), $operator, $term) . '))';
     } elseif ($attr->name() === 'playable') {
       return ('(player_class IS NULL OR ' . $this->parseCriterion(new Key(str_split('class')), $operator, $term)) . ')';
     } elseif ($attr->name() === 'format') {
@@ -193,16 +196,8 @@ class Search {
     return "($column IS NOT NULL AND $column <> '' AND $column $operator " . D()->quote($term) . ")";
   }
 
-  private function booleanWhere($column, $truthiness) {
-    $where = '(';
-    if (!$truthiness) {
-      $where .= 'NOT ';
-    }
-    return $where . "$column)";
-  }
-
   private function truthiness($v) {
-    if (in_array($v, ['', '0', 'n', 'no'])) {
+    if (in_array(mb_strtolower($v), ['', '0', 'n', 'no'])) {
       return false;
     } else {
       return (boolean)$v;

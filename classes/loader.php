@@ -15,6 +15,10 @@ class Loader {
     $this->deleteAll();
     $this->insertCards();
     $this->setupSystemIdToIdMap();
+    $this->insertSets();
+    $this->setupSetNameToIdMap();
+    $this->insertCardSets();
+    $this->insertSetNames();
     $this->insertMechanics();
     $this->insertCardMechanics();
     $this->insertPlayRequirements();
@@ -36,6 +40,12 @@ class Loader {
     $sql = 'DELETE FROM mechanic';
     $this->transaction->execute($sql);
     $sql = 'DELETE FROM play_requirement';
+    $this->transaction->execute($sql);
+    $sql = 'DELETE FROM `set`';
+    $this->transaction->execute($sql);
+    $sql = 'DELETE FROM card_set';
+    $this->transaction->execute($sql);
+    $sql = 'DELETE FROM set_name';
     $this->transaction->execute($sql);
     $sql = 'DELETE FROM format';
     $this->transaction->execute($sql);
@@ -64,6 +74,73 @@ class Loader {
     $f = function ($x) use (&$systemIdToIdMap) { $systemIdToIdMap[$x['system_id']] = $x['id']; };
     array_map($f, $this->transaction->execute($sql));
     $this->systemIdToIdMap = $systemIdToIdMap;
+  }
+
+  private function insertSets() {
+    $sql = 'INSERT INTO `set` (name) VALUES ';
+    $args = $this->allValues('set');
+    $sql .= str_repeat('(?), ', count($args));
+    $sql  = rtrim($sql, ', ');
+    return $this->transaction->execute($sql, $args);
+  }
+
+  private function setupSetNameToIdMap() {
+    $sql = 'SELECT name, id FROM `set`';
+    $setNameToIdMap = [];
+    $f = function ($x) use (&$setNameToIdMap) { $setNameToIdMap[$x['name']] = $x['id']; };
+    array_map($f, $this->transaction->execute($sql));
+    $this->setNameToIdMap = $setNameToIdMap;
+  }
+
+  private function insertCardSets() {
+    $args = [];
+    foreach ($this->cards as $card) {
+      if (!isset($card['set'])) {
+        continue;
+      }
+      $args[] = $this->systemIdToIdMap[$card['id']];
+      $args[] = $this->setNameToIdMap[$card['set']];
+    }
+    $sql = 'INSERT INTO card_set (card_id, set_id) VALUES ';
+    $sql .= str_repeat('(?, ?), ', count($args) / 2);
+    $sql = rtrim($sql, ', ');
+    return $this->transaction->execute($sql, $args);
+  }
+
+  private function insertSetNames() {
+    // Hardcoded for now because no API has this.
+    $setNames = [
+      'CORE' => [],
+      'BRM' => ['Blackrock Mountain'],
+      'LOE' => ['The League of Explorers', 'TLOE'],
+      'CREDITS' => '',
+      'GVG' => ['Goblins vs Gnomes', 'Goblins v Gnomes', 'Goblins versus Gnomes'],
+      'EXPERT1' => [],
+      'NAXX' => ['Curse of Naxxramas', 'CN', 'CON'],
+      'OG' => ['WOTOG', 'WOTG', 'Whispers of the Old Gods'],
+      'TB' => [],
+      'TGT' => ['The Grand Tournament'],
+      'MISSIONS' => [],
+      'CHEAT' => [],
+      'NONE' => [],
+      'HERO_SKINS' => ['Hero Skins'],
+      'PROMO' => [],
+      'REWARD' => [],
+    ];
+    foreach ($setNames as $set => $alternativeNames) {
+      $setId = $this->setNameToIdMap[$set];
+      $args[] = $setId;
+      $args[] = $set;
+      var_dump($alternativeNames);
+      foreach ($alternativeNames as $name) {
+        $args[] = $setId;
+        $args[] = $name;
+      }
+    }
+    $sql = 'INSERT INTO set_name (set_id, name) VALUES ';
+    $sql .= str_repeat('(?, ?), ', count($args) / 2);
+    $sql = rtrim($sql, ', ');
+    return $this->transaction->execute($sql, $args);
   }
 
   private function insertMechanics() {
@@ -173,8 +250,12 @@ class Loader {
       if (!isset($card[$key])) {
         continue;
       }
-      foreach ($card[$key] as $k => $v) {
-        $values[$useKey ? $k : $v] = true;
+      if (is_array($card[$key])) {
+        foreach ($card[$key] as $k => $v) {
+          $values[$useKey ? $k : $v] = true;
+        }
+      } else {
+        $values[$card[$key]] = true;
       }
     }
     return array_keys($values);

@@ -19,7 +19,7 @@ class HearthstoneTextSearch {
     if ($where === null || trim($q) === '') {
       return [];
     }
-    $sql = 'SELECT * FROM card WHERE ' . $where . ' ORDER BY name';
+    $sql = 'SELECT * FROM card AS c INNER JOIN card_set AS cs ON c.id = cs.card_id WHERE ' . $where . ' ORDER BY name';
     try {
       $cards = D()->execute($sql);
     } catch (DatabaseException $e) {

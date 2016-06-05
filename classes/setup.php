@@ -36,6 +36,29 @@ class Setup {
 
       $card,
 
+      "CREATE TABLE `set` ("
+        . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, "
+        . "name NVARCHAR(64) NOT NULL UNIQUE"
+        . ") Engine = InnoDB DEFAULT CHARSET=UTF8",
+
+      "CREATE TABLE card_set ("
+        . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, "
+        . "card_id INT NOT NULL, "
+        . "set_id INT NOT NULL, "
+        . "FOREIGN KEY (card_id) REFERENCES card (id) "
+        . "ON UPDATE NO ACTION ON DELETE CASCADE, "
+        . "FOREIGN KEY (set_id) REFERENCES `set` (id) "
+        . "ON UPDATE NO ACTION ON DELETE CASCADE"
+        . ") Engine = InnoDB DEFAULT CHARSET=UTF8",
+
+      "CREATE TABLE set_name ("
+        . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, "
+        . "set_id INT NOT NULL, "
+        . "name NVARCHAR(255) NOT NULL UNIQUE, "
+        . "FOREIGN KEY (set_id) REFERENCES `set` (id) "
+        . "ON UPDATE NO ACTION ON DELETE CASCADE"
+        . ") Engine = InnoDB DEFAULT CHARSET=UTF8",
+
       "CREATE TABLE mechanic ("
         . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, "
         . "name NVARCHAR(64) NOT NULL "
