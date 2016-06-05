@@ -28,7 +28,6 @@ FEATURES
 - Comments on cards
 - Link to the wiki from basically every keyword.
 - Nice js mouseovers with bootstrap for basically every keyword.
-- Support querying on everything we store not just some things.
 - Smaller image option.
 - Ordering options.
 - Output options.
@@ -42,6 +41,10 @@ MINOR BUGS
 
 MINOR IMPROVEMENTS
 
+- ordering should be
+class(druid,hunter,mage,paladin,priest,rogue,shaman,warlock,warrior,neutral)
+cmc
+alphabetical
 - Add alt and other attributes to the imgs.
 - The way we are doing sets is messy and bad. They should probably have their own table and ids and then another table of alternative names.
 - Find a better way to clean data (and reset auto_increment) in Loader.
