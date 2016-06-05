@@ -131,7 +131,6 @@ class Loader {
       $setId = $this->setNameToIdMap[$set];
       $args[] = $setId;
       $args[] = $set;
-      var_dump($alternativeNames);
       foreach ($alternativeNames as $name) {
         $args[] = $setId;
         $args[] = $name;
