@@ -113,7 +113,7 @@ class Loader {
       'CORE' => [],
       'BRM' => ['Blackrock Mountain'],
       'LOE' => ['The League of Explorers', 'TLOE'],
-      'CREDITS' => '',
+      'CREDITS' => [],
       'GVG' => ['Goblins vs Gnomes', 'Goblins v Gnomes', 'Goblins versus Gnomes'],
       'EXPERT1' => [],
       'NAXX' => ['Curse of Naxxramas', 'CN', 'CON'],
@@ -230,15 +230,15 @@ class Loader {
     array_map($f, $this->transaction->execute($sql));
     $standardSets = ['CORE', 'BRM', 'LOE', 'OG', 'TGT', 'EXPERT1', 'MISSIONS'];
     $wildSets = array_merge($standardSets, ['GVG', 'NAXX', 'PROMO', 'REWARD']);
-    $sql = 'INSERT INTO format_set (format_id, `set`) VALUES ';
+    $sql = 'INSERT INTO format_set (format_id, set_id) VALUES ';
     $sql .= str_repeat('(?, ?), ', count($standardSets) + count($wildSets));
     $sql = rtrim($sql, ', ');
     $args = [];
     foreach ($standardSets as $set) {
-      $args = array_merge($args, [$nameToIdMap['STANDARD'], $set]);
+      $args = array_merge($args, [$nameToIdMap['STANDARD'], $this->setNameToIdMap[$set]]);
     }
     foreach ($wildSets as $set) {
-      $args = array_merge($args, [$nameToIdMap['WILD'], $set]);
+      $args = array_merge($args, [$nameToIdMap['WILD'], $this->setNameToIdMap[$set]]);
     }
     return $this->transaction->execute($sql, $args);
   }

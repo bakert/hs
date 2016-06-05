@@ -108,8 +108,10 @@ class Setup {
       "CREATE TABLE format_set ("
         . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, "
         . "format_id INT NOT NULL, "
-        . "`set` NVARCHAR(64) NOT NULL, "
+        . "set_id INT NOT NULL, "
         . "FOREIGN KEY (format_id) REFERENCES format (id) "
+        . "ON UPDATE NO ACTION ON DELETE CASCADE, "
+        . "FOREIGN KEY (set_id) REFERENCES `set` (id) "
         . "ON UPDATE NO ACTION ON DELETE CASCADE"
         . ") Engine = InnoDB DEFAULT CHARSET=UTF8",
 

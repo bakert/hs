@@ -94,7 +94,7 @@ class Search {
     } elseif ($attr->name() === 'playable') {
       return ('(player_class IS NULL OR ' . $this->parseCriterion(new Key(str_split('class')), $operator, $term)) . ')';
     } elseif ($attr->name() === 'format') {
-      return ('`set` IN (SELECT `set` FROM format_set WHERE format_id IN (SELECT id FROM format WHERE ' . $this->where('name', $operator->value(), $term->value()) . '))');
+      return ('set_id IN (SELECT set_id FROM format_set WHERE format_id IN (SELECT id FROM format WHERE ' . $this->where('name', $operator->value(), $term->value()) . '))');
     } else {
       throw new ParseException('Unrecognized key: `' . $key->value() . '` in parseCriterion.');
     }

@@ -1,5 +1,7 @@
 BUGS
 
+- s: does not work for set but set: does.
+
 IMPROVEMENTS
 
 - Support rarity null whatever that means (basic? no rarity?)
