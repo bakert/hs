@@ -9,7 +9,7 @@ class HearthstoneTextSearch {
     $args['results'] = $this->search($q);
     $args['numResults'] = count($args['results']);
     $args['pluralResults'] = count($args['results']) === 1 ? '' : 's';
-    $args['urlPrefix'] = U('/');
+    $args['urlPrefix'] = U('');
     return T()->index($args);
   }
 
