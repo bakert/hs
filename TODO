@@ -1,14 +1,5 @@
 BUGS
 
-- faction, and maybe other things, have nulls. NULL is false for both LIKE and for NOT LIKE so they never come in search results where we interact with that column.
-  Example buggy searches:
-      NOT faction:a NOT faction:h has 0 results instead of hundreds
-      NOT artist:fudsailfjdsklafjdkslajfdksla has 9 less results than format:wild
-      NOT race:dragon only returns cards with a race
-      NOT targeting_arrow_text:fjdkasp9ruw3onklfsdljafl has 5 more cards than format:wild -- alternative heroes. Why does using targeting_arrow_text make them show up?
-      NOT flavor:fdjslfjdslkfjdksljfls has 10 less cards than format:wild
-      NOT cost=-100 has 5 more cards than format:wild (alternative heroes)
-
 IMPROVEMENTS
 
 - Pagination/infinite scroll.
@@ -66,7 +57,7 @@ alphabetical
 - Search query generation uses a lot of concatenation. Can it instead use PDO somehow? We can then not need Database->quote.
 - Support is:weapon is:collectible isnt:weapon isnt:collectible?
 - Pagination
-= debug=1 should also breakdown how the search was parsed. ("s:og"s)
+= debug=1 should also breakdown how the search was parsed. ("s:og")
 
 MINOR FEATURES
 

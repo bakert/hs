@@ -26,6 +26,7 @@ class Loader {
     $this->insertEntourage();
     $this->insertFormats();
     $this->insertSetFormats();
+    $this->updateWithFixes();
     return $this->transaction->commit();
   }
 
@@ -241,6 +242,17 @@ class Loader {
       $args = array_merge($args, [$nameToIdMap['WILD'], $this->setNameToIdMap[$set]]);
     }
     return $this->transaction->execute($sql, $args);
+  }
+
+  private function updateWithFixes() {
+    $sql = "UPDATE card SET race = '' WHERE race IS NULL AND type = 'MINION'";
+    $this->transaction->execute($sql);
+    $sql = "UPDATE card SET faction = '' WHERE faction IS NULL AND type = 'MINION'";
+    $this->transaction->execute($sql);
+    $sql = "UPDATE card SET artist = '' WHERE artist IS NULL";
+    $this->transaction->execute($sql);
+    $sql = "UPDATE card SET flavor = '' WHERE flavor IS NULL";
+    return $this->transaction->execute($sql);
   }
 
   private function allValues($key, $useKey = false) {
