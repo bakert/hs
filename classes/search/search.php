@@ -199,7 +199,7 @@ class Search {
     if (!in_array($operator, ['>', '<', '=', '<=', '>='])) {
         return 'FALSE';
     }
-    return "($column IS NOT NULL AND $column <> '' AND $column $operator " . D()->quote($term) . ")";
+    return "($column IS NOT NULL AND $column $operator " . D()->quote($term) . ")";
   }
 
   private function truthiness($v) {
