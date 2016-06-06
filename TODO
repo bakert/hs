@@ -1,7 +1,5 @@
 BUGS
 
-- s: does not work for set but set: does.
-
 IMPROVEMENTS
 
 - Support rarity null whatever that means (basic? no rarity?)
@@ -10,6 +8,7 @@ IMPROVEMENTS
 
 FEATURES
 
+- Show something on the homepage instead of a lot of whitespace. 3 random cards or suggested searches or the help text or recent searches or a featured card or anything really! Also when searches yield no results.
 - I added a middle param to Search->where so we can see "!" as well as ":" and apply a NOT but I haven't done it yet. text!secret.
 - Support searching for "can be used by class X" (different from class because includes neutral)
 - Allow query/use in all languages supported not just en_US (API supports this with different URL for json).
@@ -32,8 +31,6 @@ FEATURES
 
 MINOR BUGS
 
-- format_set should use set_id not the string identifier.
-- Spacing around Submit is bad
 - Can't search for totems?
 - If you search for type:hero_power then (a) it's gross you have to include an underscore and (b) you won't see anything unless you also say no collectible and (c) this is currently broken even if you do this.
 - http://wow.zamimg.com/images/hearthstone/cards/enus/original/CS2_041e.png is a blank image.
@@ -41,6 +38,7 @@ MINOR BUGS
 
 MINOR IMPROVEMENTS
 
+- Better explanation of why your search found nothing. "spelldmg>0" should not just say "0 cards".
 - Log every search and num results if anyone ever uses it so we can see what they thought should work that did not.
 - ordering should be
 class(druid,hunter,mage,paladin,priest,rogue,shaman,warlock,warrior,neutral)
@@ -60,6 +58,7 @@ alphabetical
 - Search query generation uses a lot of concatenation. Can it instead use PDO somehow? We can then not need Database->quote.
 - Support is:weapon is:collectible isnt:weapon isnt:collectible?
 - Pagination
+= debug=1 should also breakdown how the search was parsed. ("s:og"s)
 
 MINOR FEATURES
 
@@ -76,3 +75,4 @@ NOTES
 # http://www.hearthhead.com/cards
 # https://raw.githubusercontent.com/HearthSim/hs-data/master/CardDefs.xml <-- contains the "true" name of all the attributes and some info the json doesn't have.
 # https://omgvamp-hearthstone-v1.p.mashape.com/cards is a sligthly nicer API with images.
+# http://www.gosugamers.net/hearthstone/cards

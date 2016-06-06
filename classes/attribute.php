@@ -33,7 +33,7 @@ class Attribute {
       static::$attributes[] = new Attribute('rarity', 'rarity', 'rarity', ['rarity', 'r'], Key::TEXT);
       static::$attributes[] = new Attribute('durability', 'durability', 'durability', ['durability', 'd'], Key::NUMBER);
       static::$attributes[] = new Attribute('overload', 'overload', 'overload', ['overload', 'o'], Key::NUMBER);
-      static::$attributes[] = new Attribute('set', null, null, ['set', 's'], Key::SPECIAL); // set does appear in the JSON but we handle it as a special case.
+      static::$attributes[] = new Attribute('set', null, null /* in db, but handled as a special case */, ['set', 's'], Key::SPECIAL);
       static::$attributes[] = new Attribute('playable', null, null, ['playable', 'play', 'p'], Key::SPECIAL);
       static::$attributes[] = new Attribute('format', null, null, ['format', 'f'], Key::SPECIAL);
     }

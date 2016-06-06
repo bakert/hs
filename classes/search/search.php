@@ -89,7 +89,7 @@ class Search {
         return '(collectible IS NULL OR collectible IS NOT NULL)'; // Always true but avoids the later check for presence of 'collectible' in query.
       }
       return '(collectible IS ' . ($this->truthiness($term->value()) ? 'NOT ' : '') . 'NULL)';
-    } elseif ($key->value() === 'set') {
+    } elseif ($attr->name() === 'set') {
       return '(set_id IN (SELECT set_id FROM set_name WHERE ' . $this->parseCriterion(new Key(str_split('name')), $operator, $term) . '))';
     } elseif ($attr->name() === 'playable') {
       return ('(player_class IS NULL OR ' . $this->parseCriterion(new Key(str_split('class')), $operator, $term)) . ')';
