@@ -55,7 +55,7 @@ class Search {
         $where .= " $activeBooleanOperator ";
       }
       if ($token->type() === 'String') {
-        $where .= $this->where('name', '=', $token->value());
+        $where .= $this->where('name', '=', $token->value(), Key::TEXT_ANY);
       } elseif ($token->type() === 'Key') {
         if (!isset($tokens[$i + 1]) || !isset($tokens[$i + 2])) {
             throw new ParseException("Insufficient tokens to complete key at $i");
@@ -80,8 +80,8 @@ class Search {
     $attr = Attribute::fromKey($key->value());
     if ($attr === null) {
       throw new ParseException('Bad key: ' . $key->value());
-    } elseif ($attr->type() === Key::TEXT) {
-      return $this->where($attr->dbName(), $operator->value(), $term->value());
+    } elseif ($attr->type() === Key::TEXT_EXACT || $attr->type() === Key::TEXT_BEGIN || $attr->type() === Key::TEXT_ANY) {
+      return $this->where($attr->dbName(), $operator->value(), $term->value(), $attr->type());
     } elseif ($attr->type() === Key::NUMBER) {
       return $this->mathWhere($attr->dbName(), $operator->value(), $term->value());
     } elseif ($attr->name() === 'collectible') {
@@ -94,7 +94,7 @@ class Search {
     } elseif ($attr->name() === 'playable') {
       return ('(player_class IS NULL OR ' . $this->parseCriterion(new Key(str_split('class')), $operator, $term)) . ')';
     } elseif ($attr->name() === 'format') {
-      return ('set_id IN (SELECT set_id FROM format_set WHERE format_id IN (SELECT id FROM format WHERE ' . $this->where('name', $operator->value(), $term->value()) . '))');
+      return ('set_id IN (SELECT set_id FROM format_set WHERE format_id IN (SELECT id FROM format WHERE ' . $this->where('name', $operator->value(), $term->value(), Key::TEXT_BEGIN) . '))');
     } else {
       throw new ParseException('Unrecognized key: `' . $key->value() . '` in parseCriterion.');
     }
@@ -178,8 +178,14 @@ class Search {
     return new Expression(isset($tokens[0]) ? $tokens[0] : []);
   }
 
-  private function where($column, $operator, $term, $exactMatch = false) {
-    $q = $exactMatch ? $term : '%' . $term . '%';
+  private function where($column, $operator, $term, $matchType) {
+    $q = $term;
+    if ($matchType === Key::TEXT_BEGIN || $matchType === Key::TEXT_ANY) {
+      $q = "$q%";
+    }
+    if ($matchType === Key::TEXT_ANY) {
+      $q = "%$q";
+    }
     $subsequent = false;
     $where = "($column ";
     if ($operator === '!') {
