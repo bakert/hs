@@ -245,6 +245,8 @@ class Loader {
   }
 
   private function updateWithFixes() {
+    $sql = "UPDATE card SET player_class = '' WHERE player_class IS NULL";
+    $this->transaction->execute($sql);
     $sql = "UPDATE card SET race = '' WHERE race IS NULL AND type = 'MINION'";
     $this->transaction->execute($sql);
     $sql = "UPDATE card SET faction = '' WHERE faction IS NULL AND type = 'MINION'";

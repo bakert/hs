@@ -23,13 +23,19 @@ class Setup {
       }
       $card .= '`' . $attr->dbName() . '` ';
       if ($attr->type() === Key::NUMBER) {
-        $card .= "INT";
+        $card .= 'INT';
       } else {
-        $card .= "NVARCHAR(64)";
+        $card .= 'NVARCHAR(64)';
       }
-      $card .= ", ";
+      if (in_array($attr->dbName(), ['name', 'type', 'system_id'])) {
+        $card .= ' NOT NULL';
+      }
+      if (in_array($attr->dbName(), ['system_id'])) {
+        $card .= ' UNIQUE';
+      }
+      $card .= ', ';
     }
-    $card = rtrim($card, ", ");
+    $card = rtrim($card, ', ');
     $card .= ") Engine = InnoDB DEFAULT CHARSET=UTF8";
 
     $statements = [

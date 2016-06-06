@@ -2,8 +2,6 @@ BUGS
 
 IMPROVEMENTS
 
-- Pagination/infinite scroll.
-
 FEATURES
 
 - Show something on the homepage instead of a lot of whitespace. 3 random cards or suggested searches or the help text or recent searches or a featured card or anything really! Also when searches yield no results.
@@ -36,6 +34,7 @@ MINOR BUGS
 
 MINOR IMPROVEMENTS
 
+- Pagination/infinite scroll.
 - Support rarity null whatever that means (basic? no rarity?)
 - Better explanation of why your search found nothing. "spelldmg>0" should not just say "0 cards".
 - Log every search and num results if anyone ever uses it so we can see what they thought should work that did not.
@@ -58,6 +57,7 @@ alphabetical
 - Support is:weapon is:collectible isnt:weapon isnt:collectible?
 - Pagination
 = debug=1 should also breakdown how the search was parsed. ("s:og")
+- Support > and < style operators in rarity search
 
 MINOR FEATURES
 
