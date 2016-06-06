@@ -228,7 +228,7 @@ class Loader {
     $nameToIdMap = [];
     $f = function ($x) use (&$nameToIdMap) { $nameToIdMap[$x['name']] = $x['id']; };
     array_map($f, $this->transaction->execute($sql));
-    $standardSets = ['CORE', 'BRM', 'LOE', 'OG', 'TGT', 'EXPERT1', 'MISSIONS'];
+    $standardSets = ['CORE', 'BRM', 'LOE', 'OG', 'TGT', 'EXPERT1', 'MISSIONS', 'HERO_SKINS'];
     $wildSets = array_merge($standardSets, ['GVG', 'NAXX', 'PROMO', 'REWARD']);
     $sql = 'INSERT INTO format_set (format_id, set_id) VALUES ';
     $sql .= str_repeat('(?, ?), ', count($standardSets) + count($wildSets));
