@@ -1,11 +1,12 @@
 BUGS
 
-- Are we including no-set cards in standard/wild? should we be?
 - faction, and maybe other things, have nulls. NULL is false for both LIKE and for NOT LIKE so they never come in search results where we interact with that column.
+  Example buggy searches:
+      NOT faction:a NOT faction:h
+      NOT artist:fudsailfjdsklafjdkslajfdksla
 
 IMPROVEMENTS
 
-- Support shortened names: b, c, r, e, l for rarity -- currently because we LIKE %x% something like 'c' matches way too much
 - Pagination/infinite scroll.
 
 FEATURES
