@@ -15,6 +15,11 @@ class Setup {
     D()->execute("USE " . C()->databasename());
     $this->useSuccessful = true;
 
+    foreach (['card_set', 'set_name', 'card_mechanic', 'mechanic', 'entourage', 'card_play_requirement', 'play_requirement', 'format_set', 'format', 'set', 'card'] as $table) {
+      $sql = "DROP TABLE IF EXISTS `$table`";
+      D()->execute($sql);
+    }
+
     $card = "CREATE TABLE card ("
       . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, ";
     foreach (Attribute::attributes() as $attr) {

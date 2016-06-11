@@ -92,7 +92,7 @@ class Search {
     } elseif ($attr->name() === 'set') {
       return '(set_id IN (SELECT set_id FROM set_name WHERE ' . $this->parseCriterion(new Key(str_split('name')), $operator, $term) . '))';
     } elseif ($attr->name() === 'playable') {
-      return ('(player_class IS NULL OR ' . $this->parseCriterion(new Key(str_split('class')), $operator, $term)) . ')';
+      return ("(player_class IS NULL OR player_class = '' OR " . $this->parseCriterion(new Key(str_split('class')), $operator, $term)) . ')';
     } elseif ($attr->name() === 'format') {
       return ('set_id IN (SELECT set_id FROM format_set WHERE format_id IN (SELECT id FROM format WHERE ' . $this->where('name', $operator->value(), $term->value(), Key::TEXT_BEGIN) . '))');
     } else {
