@@ -29,8 +29,10 @@ class Setup {
       $card .= '`' . $attr->dbName() . '` ';
       if ($attr->type() === Key::NUMBER) {
         $card .= 'INT';
+      } elseif ($attr->name() === 'text') {
+        $card .= 'NVARCHAR(1000)';
       } else {
-        $card .= 'NVARCHAR(64)';
+        $card .= 'NVARCHAR(100)';
       }
       if (in_array($attr->dbName(), ['name', 'type', 'system_id'])) {
         $card .= ' NOT NULL';
@@ -49,7 +51,7 @@ class Setup {
 
       "CREATE TABLE `set` ("
         . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, "
-        . "name NVARCHAR(64) NOT NULL UNIQUE"
+        . "name NVARCHAR(100) NOT NULL UNIQUE"
         . ") Engine = InnoDB DEFAULT CHARSET=UTF8",
 
       "CREATE TABLE card_set ("
@@ -65,14 +67,14 @@ class Setup {
       "CREATE TABLE set_name ("
         . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, "
         . "set_id INT NOT NULL, "
-        . "name NVARCHAR(255) NOT NULL UNIQUE, "
+        . "name NVARCHAR(100) NOT NULL UNIQUE, "
         . "FOREIGN KEY (set_id) REFERENCES `set` (id) "
         . "ON UPDATE NO ACTION ON DELETE CASCADE"
         . ") Engine = InnoDB DEFAULT CHARSET=UTF8",
 
       "CREATE TABLE mechanic ("
         . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, "
-        . "name NVARCHAR(64) NOT NULL "
+        . "name NVARCHAR(100) NOT NULL "
         . ") Engine = InnoDB DEFAULT CHARSET=UTF8",
 
       "CREATE TABLE card_mechanic ("
@@ -113,7 +115,7 @@ class Setup {
 
       "CREATE TABLE format ("
         . "id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL, "
-        . "name NVARCHAR(64)"
+        . "name NVARCHAR(100)"
         . ") Engine = InnoDB DEFAULT CHARSET=UTF8",
 
       "CREATE TABLE format_set ("
