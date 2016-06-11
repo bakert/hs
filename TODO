@@ -4,15 +4,6 @@ IMPROVEMENTS
 
 FEATURES
 
-- Show something on the homepage instead of a lot of whitespace. 3 random cards or suggested searches or the help text or recent searches or a featured card or anything really! Also when searches yield no results.
-- I added a middle param to Search->where so we can see "!" as well as ":" and apply a NOT but I haven't done it yet. text!secret.
-- Support searching for "can be used by class X" (different from class because includes neutral)
-- Allow query/use in all languages supported not just en_US (API supports this with different URL for json).
-- An "Advanced Search" form that lets you do it the crappy way.
-- Generate examples automatically by spidering db and generating some likely searches (!)
-- Mouseover behavior that mimics the game in list view
-- Static explanatory text that mimics the game in detail view
-- Show how much dust you get/need for each version of a card (based on rarity and whether it can be crafted?)
 - Do something with card_mechanic and mechanic tables.
 - Do something with card_play_requirement and play_requirement tables. (See https://github.com/HearthSim/hs-data/blob/master/PlayErrors.xml)
 - Deck stats for found cards
@@ -24,16 +15,19 @@ FEATURES
 - Smaller image option.
 - Ordering options.
 - Output options.
+- An "Advanced Search" form that lets you do it the crappy way. Possibly showing by default under the search box.
+- Output order options.
+- Mouseover behavior that mimics the game in list view
+- Static explanatory text that mimics the game in detail view
 
 MINOR BUGS
 
-- Can't search for totems?
-- If you search for type:hero_power then (a) it's gross you have to include an underscore and (b) you won't see anything unless you also say no collectible and (c) this is currently broken even if you do this.
 - http://wow.zamimg.com/images/hearthstone/cards/enus/original/CS2_041e.png is a blank image.
 - It's a bit silly that attribute keys (and other keys) must be listed longest-first to prevent a shorter string "stealing" another. Just don't match unless we match the whole thing + an operator + a value. Backtracking?
 
 MINOR IMPROVEMENTS
 
+- Skycap'n Kragg has Charrrrrge not Charge although they do the same thing. But search on text won't find it. Need "m:charge" or similar?
 - Pagination/infinite scroll.
 - Support rarity null whatever that means (basic? no rarity?)
 - Better explanation of why your search found nothing. "spelldmg>0" should not just say "0 cards".
@@ -56,11 +50,17 @@ alphabetical
 - Search query generation uses a lot of concatenation. Can it instead use PDO somehow? We can then not need Database->quote.
 - Support is:weapon is:collectible isnt:weapon isnt:collectible?
 - Pagination
-= debug=1 should also breakdown how the search was parsed. ("s:og")
+- debug=1 should also breakdown how the search was parsed. ("s:og")
 - Support > and < style operators in rarity search
+- Support in-hs style searching on numeric values like cost:3- and cost:1-4 as per http://us.battle.net/hearthstone/en/blog/20056284/search-your-hearthstone-collection-like-never-before-3-17-2016 (maybe INSTEAD of > <, etc.)
 
 MINOR FEATURES
 
+- Show how much dust you get/need for each version of a card (based on rarity and whether it can be crafted?)
+- Generate examples automatically by spidering db and generating some likely searches (!)
+- Allow query/use in all languages supported not just en_US (API supports this with different URL for json).
+- I added a middle param to Search->where so we can see "!" as well as ":" and apply a NOT but I haven't done it yet. text!secret.
+- Show something on the homepage instead of a lot of whitespace. 3 random cards or suggested searches or the help text or recent searches or a featured card or anything really! Also when searches yield no results.
 - Search for totems
 - Search for secrets
 - When a card would summon a random 3 cost beast or whatever link to a search for all of them (note: different if standard or wild).
@@ -75,3 +75,4 @@ NOTES
 # https://raw.githubusercontent.com/HearthSim/hs-data/master/CardDefs.xml <-- contains the "true" name of all the attributes and some info the json doesn't have.
 # https://omgvamp-hearthstone-v1.p.mashape.com/cards is a sligthly nicer API with images.
 # http://www.gosugamers.net/hearthstone/cards
+# http://us.battle.net/hearthstone/en/blog/20056284/search-your-hearthstone-collection-like-never-before-3-17-2016
