@@ -12,17 +12,17 @@ class Template {
 
   private function render($template, $vars = []) {
     return
-      $this->renderHeader()
+      $this->renderHeader($vars)
       . $this->engine->render($template, $vars)
       . $this->renderFooter();
   }
 
-  private function renderHeader() {
+  private function renderHeader($vars) {
     $args = [
       'homeUrl' => U('/'),
       'cssUrl' => U('/css/hs.css')
     ];
-
+    $args = array_merge($args, $vars);
     return $this->engine->render('header', $args);
   }
 
