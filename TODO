@@ -4,22 +4,6 @@ IMPROVEMENTS
 
 FEATURES
 
-- Do something with card_mechanic and mechanic tables.
-- Do something with card_play_requirement and play_requirement tables. (See https://github.com/HearthSim/hs-data/blob/master/PlayErrors.xml)
-- Deck stats for found cards
-- Deck lists for found cards
-- Similar cards
-- Comments on cards
-- Link to the wiki from basically every keyword.
-- Nice js mouseovers with bootstrap for basically every keyword.
-- Smaller image option.
-- Ordering options.
-- Output options.
-- An "Advanced Search" form that lets you do it the crappy way. Possibly showing by default under the search box.
-- Output order options.
-- Mouseover behavior that mimics the game in list view
-- Static explanatory text that mimics the game in detail view
-
 MINOR BUGS
 
 - http://wow.zamimg.com/images/hearthstone/cards/enus/original/CS2_041e.png is a blank image.
@@ -27,24 +11,6 @@ MINOR BUGS
 
 MINOR IMPROVEMENTS
 
-- Skycap'n Kragg has Charrrrrge not Charge although they do the same thing. But search on text won't find it. Need "m:charge" or similar?
-- Pagination/infinite scroll.
-- Support rarity null whatever that means (basic? no rarity?)
-- Better explanation of why your search found nothing. "spelldmg>0" should not just say "0 cards".
-- Log every search and num results if anyone ever uses it so we can see what they thought should work that did not.
-- ordering should be
-class(druid,hunter,mage,paladin,priest,rogue,shaman,warlock,warrior,neutral)
-cmc
-alphabetical
-- Add alt and other attributes to the imgs.
-- The way we are doing sets is messy and bad. They should probably have their own table and ids and then another table of alternative names.
-- Find a better way to clean data (and reset auto_increment) in Loader.
-- Search term in <title>. Card name in <title>.
-- Default to f:standard and make them say wild if they want it
-- Mirror on github by adding as a remote
-- Optionally always instead/as well show golden (premium) version
-- is hearthstoneapi.com just better/the same as hearthstonejson.com? Has image urls?
-- config.json should use "database.name" and convert to databaseName() on Config.
 - Use a namespace.
 - Search when it uses the WHERE clause generated in the top level SQL should use PDO placeholder but that doesn't seem to work for some reason so is using concatenation
 - Search query generation uses a lot of concatenation. Can it instead use PDO somehow? We can then not need Database->quote.
@@ -53,9 +19,27 @@ alphabetical
 - debug=1 should also breakdown how the search was parsed. ("s:og")
 - Support > and < style operators in rarity search
 - Support in-hs style searching on numeric values like cost:3- and cost:1-4 as per http://us.battle.net/hearthstone/en/blog/20056284/search-your-hearthstone-collection-like-never-before-3-17-2016 (maybe INSTEAD of > <, etc.)
+- Skycap'n Kragg has Charrrrrge not Charge although they do the same thing. But search on text won't find it. Need "m:charge" or similar? card_mechanic table has him as having CHARGE.
+- Pagination/infinite scroll.
+- Better explanation of why your search found nothing. "spelldmg>0" should not just say "0 cards".
+- Log every search and num results if anyone ever uses it so we can see what they thought should work that did not.
+- Default to f:standard and make them say wild if they want it
+- Optionally always instead/as well show golden (premium) version
 
 MINOR FEATURES
 
+- An "Advanced Search" form that lets you do it the crappy way. Possibly showing by default under the search box.
+- Mouseover behavior that mimics the game in list view
+- Static explanatory text that mimics the game in detail view
+- Ordering options.
+- Output options.
+- Smaller image option. (http://wow.zamimg.com/images/hearthstone/cards/enus/medium/EX1_116.png)
+- Nice js mouseovers with bootstrap for basically every keyword.
+- Link to the wiki from basically every keyword.
+- Similar cards. There's a start to this in similar.php. Might need to be run as part of loader and stored if it's slow.
+- Deck stats for found cards
+- Deck lists for found cards
+- Do something with card_mechanic and mechanic tables. Does this open up much other than making Skycap'n Kragg searchable? text:"<mechanic name>" finds you things that care about the mechanic as well I suppose whereas m:charge or m:secret would find you things with that keyword only. Is replacing _ with " " good enough for search?
 - Show how much dust you get/need for each version of a card (based on rarity and whether it can be crafted?)
 - Generate examples automatically by spidering db and generating some likely searches (!)
 - Allow query/use in all languages supported not just en_US (API supports this with different URL for json).
@@ -65,6 +49,8 @@ MINOR FEATURES
 - Search for secrets
 - When a card would summon a random 3 cost beast or whatever link to a search for all of them (note: different if standard or wild).
 - More ORDER BY options. Default could be cost?
+- Do something with card_play_requirement and play_requirement tables. (See https://github.com/HearthSim/hs-data/blob/master/PlayErrors.xml)
+- Comments on cards
 
 NOTES
 
