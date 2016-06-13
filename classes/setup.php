@@ -4,15 +4,15 @@ require_once(__DIR__ . '/../hs.php');
 
 class Setup {
   public function main() {
-    if (!C()->databasename() || !C()->databaseusername()
-        || !C()->databasehost() || !C()->databasepassword()) {
-      return '<p>Add databasename, datausername, databasehose and '
-        . 'databasepassword values to config.json and reload this page.<p>';
+    if (!C()->databaseName() || !C()->databaseUsername()
+        || !C()->databaseHost() || !C()->databasePassword()) {
+      return '<p>Add database.name, database.username, database.host and '
+        . 'database.password values to config.json and reload this page.<p>';
     }
 
     $this->useSuccessful = false;
     register_shutdown_function([$this, 'databaseUnavailable']);
-    D()->execute("USE " . C()->databasename());
+    D()->execute("USE " . C()->databaseName());
     $this->useSuccessful = true;
 
     foreach (['card_set', 'set_name', 'card_mechanic', 'mechanic', 'entourage', 'card_play_requirement', 'play_requirement', 'format_set', 'format', 'set', 'card'] as $table) {
@@ -148,10 +148,10 @@ class Setup {
       echo '<p>Issue the following commands in MySQL, then reload this '
         . 'page:</p>'
         . '<pre>'
-        . 'CREATE DATABASE ' . C()->databasename() . ';'
-        . 'GRANT ALL ON ' . C()->databasename() . '' . ".* TO "
-        . C()->databaseusername() . "@" . C()->databasehost()
-        . " IDENTIFIED BY '" . addslashes(C()->databasepassword()) . "';"
+        . 'CREATE DATABASE ' . C()->databaseName() . ';'
+        . 'GRANT ALL ON ' . C()->databaseName() . '' . ".* TO "
+        . C()->databaseUsername() . "@" . C()->databaseHost()
+        . " IDENTIFIED BY '" . addslashes(C()->databasePassword()) . "';"
         . '</pre>';
       }
   }

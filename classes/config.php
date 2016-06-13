@@ -6,7 +6,13 @@ class Config {
     if (!$raw_config) {
       throw new FileNotFoundException('Unable to load config.');
     }
-    $this->vars = json_decode($raw_config, true /* as array */);
+    $vars = json_decode($raw_config, true /* as array */);
+    $this->vars = [];
+    foreach ($vars as $k => $v) {
+      $f = function($match) { return mb_strtoupper($match{1}); };
+      $key = preg_replace_callback('/\\.([a-z])/', $f, $k);
+      $this->vars[$k] = $v;
+    }
     if (!$this->vars) {
       throw new UnexpectedValueException('Unable to parse config.');
     }

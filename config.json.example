@@ -1,9 +1,9 @@
 {
-  "databasename": "hs",
-  "databasehost": "localhost",
-  "databaseusername": "hs",
-  "databasepassword": "jklasdffdhsjknvmx",
-  "databasetype": "mysql",
+  "database.name": "hs",
+  "database.host": "localhost",
+  "database.username": "hs",
+  "database.password": "jklasdffdhsjknvmx",
+  "database.type": "mysql",
   "hostname": "localhost",
   "basepath": "/hs",
   "logfile": "/var/log/apache2/hs/log"

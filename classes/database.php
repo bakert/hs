@@ -4,8 +4,8 @@ class Database {
   protected $connection;
 
   public function __construct() {
-    $connectionString = C()->databasetype() . ':host=' . C()->databasehost() . ';dbname=' . C()->databasename() . ';charset=utf8';
-    $this->connection = new PDO($connectionString, C()->databaseusername(), C()->databasepassword());
+    $connectionString = C()->databaseType() . ':host=' . C()->databaseHost() . ';dbname=' . C()->databaseName() . ';charset=utf8';
+    $this->connection = new PDO($connectionString, C()->databaseUsername(), C()->databasePassword());
   }
 
   public function execute($sql, $args = []) {
