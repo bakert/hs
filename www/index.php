@@ -27,8 +27,14 @@ class HearthstoneTextSearch {
     }
     $results = [];
     foreach ($cards as $card) {
-      $results[] = ['systemId' => $card['system_id']];
+      $results[] = [
+        'imgHeight' => 465,
+        'imgWidth' => 307,
+        'name' => $card['name'],
+        'systemId' => $card['system_id'],
+      ];
     }
+
     return $results;
   }
 }
