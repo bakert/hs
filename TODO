@@ -11,13 +11,9 @@ MINOR BUGS
 
 MINOR IMPROVEMENTS
 
-- Use a namespace.
-- Search when it uses the WHERE clause generated in the top level SQL should use PDO placeholder but that doesn't seem to work for some reason so is using concatenation
-- Search query generation uses a lot of concatenation. Can it instead use PDO somehow? We can then not need Database->quote.
-- Support is:weapon is:collectible isnt:weapon isnt:collectible?
 - Pagination
 - debug=1 should also breakdown how the search was parsed. ("s:og")
-- Support > and < style operators in rarity search
+- Support > and < style operators in rarity search. Probably by making rarity an int foreign key into another table.
 - Support in-hs style searching on numeric values like cost:3- and cost:1-4 as per http://us.battle.net/hearthstone/en/blog/20056284/search-your-hearthstone-collection-like-never-before-3-17-2016 (maybe INSTEAD of > <, etc.)
 - Skycap'n Kragg has Charrrrrge not Charge although they do the same thing. But search on text won't find it. Need "m:charge" or similar? card_mechanic table has him as having CHARGE.
 - Pagination/infinite scroll.
@@ -25,6 +21,7 @@ MINOR IMPROVEMENTS
 - Log every search and num results if anyone ever uses it so we can see what they thought should work that did not.
 - Default to f:standard and make them say wild if they want it
 - Optionally always instead/as well show golden (premium) version
+- Support is:weapon is:collectible isnt:weapon isnt:collectible?
 
 MINOR FEATURES
 
