@@ -19,9 +19,6 @@ class Config {
   }
 
   public function __call($name, $arguments) {
-    if (isset($_GET[$name])) {
-      return $_GET[$name];
-    }
     if (isset($this->vars[$name])) {
       return $this->vars[$name];
     }
