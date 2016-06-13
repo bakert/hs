@@ -11,7 +11,7 @@ class Config {
     foreach ($vars as $k => $v) {
       $f = function($match) { return mb_strtoupper($match{1}); };
       $key = preg_replace_callback('/\\.([a-z])/', $f, $k);
-      $this->vars[$k] = $v;
+      $this->vars[$key] = $v;
     }
     if (!$this->vars) {
       throw new UnexpectedValueException('Unable to parse config.');
