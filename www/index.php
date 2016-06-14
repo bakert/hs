@@ -26,6 +26,8 @@ class HearthstoneTextSearch {
         $options = ['YES', 'NO', 'BOTH'];
       } elseif ($attr->keys()[0] === 'rarity') {
         $options = ['COMMON', 'RARE', 'EPIC', 'LEGENDARY'];
+      } elseif ($attr->keys()[0] === 'type') {
+        $options = ['HERO', 'MINION', 'SPELL', 'WEAPON'];
       } elseif ($attr->dbName()) {
         $sql = 'SELECT DISTINCT ' . $attr->dbName() . ' FROM card ORDER BY ' . $attr->dbName();
         $options = D()->values($sql);

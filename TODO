@@ -24,7 +24,6 @@ IMPROVEMENTS
 
 FEATURES
 
-- An "Advanced Search" form that lets you do it the crappy way. Possibly showing by default under the search box.
 - Mouseover behavior that mimics the game in list view
 - Static explanatory text that mimics the game in detail view
 - Ordering options. (order:cost,name)

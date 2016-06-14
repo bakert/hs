@@ -16,7 +16,6 @@ class Attribute {
       static::$attributes[] = new Attribute('name', 'name', 'name', ['name'], Key::TEXT_ANY);
       static::$attributes[] = new Attribute('targetingArrowText', 'targetingArrowText', 'targeting_arrow_text', ['arrow'], Key::TEXT_ANY);
       static::$attributes[] = new Attribute('flavor', 'flavor', 'flavor', ['flavor'], Key::TEXT_ANY);
-      static::$attributes[] = new Attribute('race', 'race', 'race', ['race'], Key::TEXT_BEGIN);
       static::$attributes[] = new Attribute('howToEarn', 'howToEarn', 'how_to_earn', ['earn'], Key::TEXT_ANY);
       static::$attributes[] = new Attribute('artist', 'artist', 'artist', ['artist', 'art'], Key::TEXT_ANY);
       static::$attributes[] = new Attribute('faction', 'faction', 'faction', ['faction', 'fac'], Key::TEXT_BEGIN);
@@ -26,6 +25,7 @@ class Attribute {
       static::$attributes[] = new Attribute('overload', 'overload', 'overload', ['overload', 'o'], Key::NUMBER);
       static::$attributes[] = new Attribute('id', 'id', 'system_id', ['id'], Key::TEXT_BEGIN);
       static::$attributes[] = new Attribute('playerClass', 'playerClass', 'player_class', ['class', 'cl', 'playerclass', 'pc'], Key::TEXT_BEGIN);
+      static::$attributes[] = new Attribute('race', 'race', 'race', ['race'], Key::TEXT_BEGIN);
       static::$attributes[] = new Attribute('type', 'type', 'type', ['type', 'ty'], Key::TEXT_BEGIN);
       static::$attributes[] = new Attribute('rarity', 'rarity', 'rarity', ['rarity', 'r'], Key::TEXT_BEGIN);
       static::$attributes[] = new Attribute('health', 'health', 'health', ['health', 'h'], Key::NUMBER);
