@@ -111,14 +111,14 @@ class Loader {
   private function insertSetNames() {
     // Hardcoded for now because no API has this.
     $setNames = [
-      'CORE' => [],
+      'CORE' => ['Basic'],
       'BRM' => ['Blackrock Mountain'],
       'LOE' => ['The League of Explorers', 'TLOE'],
       'CREDITS' => [],
       'GVG' => ['Goblins vs Gnomes', 'Goblins v Gnomes', 'Goblins versus Gnomes'],
-      'EXPERT1' => [],
+      'EXPERT1' => ['Classic'],
       'NAXX' => ['Curse of Naxxramas', 'CN', 'CON'],
-      'OG' => ['WOTOG', 'WOTG', 'Whispers of the Old Gods'],
+      'OG' => ['WOTOG', 'WOTG', 'WOG', 'Whispers of the Old Gods'],
       'TB' => [],
       'TGT' => ['The Grand Tournament'],
       'MISSIONS' => [],
