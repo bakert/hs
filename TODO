@@ -1,17 +1,13 @@
 BUGS
 
-IMPROVEMENTS
-
-FEATURES
-
-MINOR BUGS
-
 - http://wow.zamimg.com/images/hearthstone/cards/enus/original/CS2_041e.png is a blank image.
 - It's a bit silly that attribute keys (and other keys) must be listed longest-first to prevent a shorter string "stealing" another. Just don't match unless we match the whole thing + an operator + a value. Backtracking?
+- Searching for a text field replaces spaces with underscores but that's not how artists are stored, are they? should be double quoted.
+- Strictly speaking `if (!parts[i].startsWith(k)) {` should be looking for k + a valid operator but does not.
 
-MINOR IMPROVEMENTS
+IMPROVEMENTS
 
-- Pagination
+- All of the queries to set up the advanced search UI only need to be run once not every time the page is loaded.
 - debug=1 should also breakdown how the search was parsed. ("s:og")
 - Support > and < style operators in rarity search. Probably by making rarity an int foreign key into another table.
 - Support in-hs style searching on numeric values like cost:3- and cost:1-4 as per http://us.battle.net/hearthstone/en/blog/20056284/search-your-hearthstone-collection-like-never-before-3-17-2016 (maybe INSTEAD of > <, etc.)
@@ -22,15 +18,18 @@ MINOR IMPROVEMENTS
 - Default to f:standard and make them say wild if they want it
 - Optionally always instead/as well show golden (premium) version
 - Support is:weapon is:collectible isnt:weapon isnt:collectible?
+- JS could be written from PHP to keep operators regex in sync with Operator.
+- The js UI could input short-form versions of the keys to hint to the user that they can use short form keys.
+- Hardcoded sets in advanced search UI could be replaced by a query if we had a table that gave us the ordering and preferred names of sets.
 
-MINOR FEATURES
+FEATURES
 
 - An "Advanced Search" form that lets you do it the crappy way. Possibly showing by default under the search box.
 - Mouseover behavior that mimics the game in list view
 - Static explanatory text that mimics the game in detail view
-- Ordering options.
+- Ordering options. (order:cost,name)
 - Output options.
-- Smaller image option. (http://wow.zamimg.com/images/hearthstone/cards/enus/medium/EX1_116.png)
+- Smaller image option. (http://wow.zamimg.com/images/hearthstone/cards/enus/medium/EX1_116.png) (images:small, image:large, img:medium)
 - Nice js mouseovers with bootstrap for basically every keyword.
 - Link to the wiki from basically every keyword.
 - Similar cards. There's a start to this in similar.php. Might need to be run as part of loader and stored if it's slow.
@@ -48,6 +47,7 @@ MINOR FEATURES
 - More ORDER BY options. Default could be cost?
 - Do something with card_play_requirement and play_requirement tables. (See https://github.com/HearthSim/hs-data/blob/master/PlayErrors.xml)
 - Comments on cards
+- Arena tier ranking from http://www.heartharena.com/tierlist
 
 NOTES
 
