@@ -10,6 +10,44 @@ class HearthstoneTextSearch {
     $args['numResults'] = count($args['results']);
     $args['pluralResults'] = count($args['results']) === 1 ? '' : 's';
     $args['urlPrefix'] = U('');
+    $args['attributes'] = [];
+    foreach (array_reverse(Attribute::attributes()) as $attr) {
+      list($humanize, $numeric, $textual) = [true, false, false];
+      if (in_array($attr->keys()[0], ['overload', 'durability', 'attack', 'health', 'cost', 'spelldamage'])) {
+        $numeric = true;
+        $options = [];
+      } elseif (in_array($attr->keys()[0], ['id', 'text', 'artist', 'name', 'flavor'])) {
+        $textual = true;
+        $options = [];
+      } elseif (in_array($attr->keys()[0], ['playable', 'class'])) {
+        $sql = "SELECT DISTINCT player_class FROM card WHERE player_class <> 'Dream' ORDER BY player_class";
+        $options = D()->values($sql);
+      } elseif ($attr->dbName() === 'collectible') {
+        $options = ['YES', 'NO', 'BOTH'];
+      } elseif ($attr->keys()[0] === 'rarity') {
+        $options = ['COMMON', 'RARE', 'EPIC', 'LEGENDARY'];
+      } elseif ($attr->dbName()) {
+        $sql = 'SELECT DISTINCT ' . $attr->dbName() . ' FROM card ORDER BY ' . $attr->dbName();
+        $options = D()->values($sql);
+      } elseif ($attr->keys()[0] === 'format') {
+        $sql = 'SELECT name FROM format ORDER BY name';
+        $options = D()->values($sql);
+      } elseif ($attr->keys()[0] === 'set') {
+        $options = ['Basic', 'Classic', 'Naxx', 'GVG', 'Blackrock', 'TGT', 'League', 'WOTOG'];
+        $humanize = false;
+      }
+      if (!in_array($attr->keys()[0], ['eg', 'earn', 'arrow'])) {
+        if ($humanize) {
+          $options = array_map([$this, 'humanize'], $options);
+        }
+        $args['attributes'][] = [
+          'name' => $attr->keys()[0],
+          'numeric' => $numeric,
+          'textual' => $textual,
+          'options' => array_values(array_filter($options)),
+        ];
+      }
+    }
     return T()->index($args);
   }
 
@@ -38,8 +76,11 @@ class HearthstoneTextSearch {
         'systemId' => $card['system_id'],
       ];
     }
-
     return $results;
+  }
+
+  private function humanize($s) {
+    return mb_convert_case(mb_ereg_replace('_', ' ', $s), MB_CASE_TITLE);
   }
 }
 

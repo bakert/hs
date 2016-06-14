@@ -42,6 +42,18 @@ class Database {
     return $rs[0][0];
   }
 
+  public function values($sql) {
+    $rs = $this->execute($sql);
+    if (!is_array($rs)) {
+      return $rs;
+    }
+    $results = [];
+    foreach ($rs as $row) {
+      $results[] = $row[0];
+    }
+    return $results;
+  }
+
   public function quote($s) {
     return $this->connection->quote($s);
   }

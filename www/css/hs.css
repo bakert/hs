@@ -1,0 +1,20 @@
+.attribute {
+  background: #eee;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin: 10px 0;
+  padding: 10px;
+}
+
+.btn-option {
+  background-image: none;
+}
+
+.btn-option .active {
+  background-color: #337ab7;
+  color: #fff;
+}
+
+.form-inline .form-control[type=number] {
+  width: 60px;
+}

@@ -4,11 +4,40 @@
       <div class="form-group">
         <input type="text" class="form-control input-lg" type="text" name="q" tabindex="1" value="{{q}}">
       </div>
-      <input class="btn btn-default" type="submit" value="Search">
-        <p class="pull-right"><a href="#">Advanced Search</a> &bull; <a href="#" data-toggle="modal" data-target="#help">Syntax Help</a> &bull; <a href="#">About</a></p>
+      <input class="btn btn-primary" type="submit" value="Search">
+        <p class="pull-right"><a href="#">About</a> &bull; <a href="#" data-toggle="modal" data-target="#help">Syntax Help</a></p>
     </form>
   </div>
 </div>
+{{^q}}
+  <div class="row">
+    <div class="col-xs-12">
+      {{#attributes}}
+        <div class="attribute btn-group form-inline" data-toggle="buttons">
+          <h4>{{name}}</h4>
+          {{#options}}
+            <label class="btn btn-default criteria" data-key="{{name}}" data-value="{{.}}">
+              <input type="radio" autocomplete="off"> {{.}}
+            </label>
+          {{/options}}
+          {{#numeric}}
+            <select class="form-control operator" data-key={{name}}>
+              <option>=</option>
+              <option>&gt;</option>
+              <option>&lt;</option>
+              <option>&gt;=</option>
+              <option>&lt;=</option>
+            </select>
+            <input class="form-control numeric" type="number" data-key={{name}}>
+          {{/numeric}}
+          {{#textual}}
+            <input class="form-control textual" type="text'" data-key="{{name}}">
+          {{/textual}}
+        </div>
+      {{/attributes}}
+    </div>
+  </div>
+{{/q}}
 <div class="row">
   {{#q}}
     <div class="col-xs-12 text-right">
