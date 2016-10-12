@@ -54,7 +54,7 @@ class Search {
       if ($token->type() !== 'BooleanOperator') {
         $where .= " $activeBooleanOperator ";
       }
-      if ($token->type() === 'String') {
+      if ($token->type() === 'Text') {
         $where .= $this->where('name', '=', $token->value(), Key::TEXT_ANY);
       } elseif ($token->type() === 'Key') {
         if (!isset($tokens[$i + 1]) || !isset($tokens[$i + 2])) {
@@ -155,17 +155,17 @@ class Search {
         }
       } elseif ($mode === static::QUOTED_STRING) {
         if ($c === '"') {
-          $tokens[$depth][] = new String(implode($string));
+          $tokens[$depth][] = new Text(implode($string));
           $mode = static::EXPECT_EXPRESSION;
         } else {
           $string[] = $c;
         }
       } elseif ($mode === static::UNQUOTED_STRING) {
         if ($c === ' ') {
-          $tokens[$depth][] = new String(implode($string));
+          $tokens[$depth][] = new Text(implode($string));
           $mode = static::EXPECT_EXPRESSION;
         } elseif ($c === ')') {
-          $tokens[$depth][] = new String(implode($string));
+          $tokens[$depth][] = new Text(implode($string));
           $mode = static::EXPECT_EXPRESSION;
           $i -= 1;
         } else {

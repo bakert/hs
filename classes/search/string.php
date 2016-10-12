@@ -1,6 +1,6 @@
 <?php
 
-class String extends Token {
+class Text extends Token {
   public function __construct($string) {
     $this->value = $string;
   }
